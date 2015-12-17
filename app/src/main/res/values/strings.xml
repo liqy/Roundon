@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Roundon</string>
+
+    <!-- Shown as the title of the user's schedule for today -->
+    <string name="day_title_today">Today</string>
+
+    <!-- Shown as the title of the user's schedule for tomorrow -->
+    <string name="day_title_tomorrow">Tomorrow</string>
+
+    <!-- Shown as the title of the user's schedule for yesterday -->
+    <string name="day_title_yesterday">Yesterday</string>
+
+    <!-- Shown as the titles of the tabs for the user's schedule -->
+    <string name="day_n">DAY %d</string>
 </resources>
