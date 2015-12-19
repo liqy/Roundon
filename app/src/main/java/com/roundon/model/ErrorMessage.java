@@ -7,4 +7,11 @@ import java.util.ArrayList;
  */
 public class ErrorMessage {
     public ArrayList<String> errors;
+
+    @Override
+    public String toString() {
+        return "ErrorMessage{" +
+                "errors=" + errors +
+                '}';
+    }
 }

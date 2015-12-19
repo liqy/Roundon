@@ -17,11 +17,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 repositories {
     mavenCentral()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://jitpack.io" }
 }
 
 
@@ -47,4 +53,11 @@ dependencies {
     compile 'me.iwf.photopicker:PhotoPicker:0.2.8@aar'
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.google.code.gson:gson:2.5'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    compile 'com.github.orhanobut:logger:1.12'
+    compile ('com.vincentbrison.openlibraries.android:dualcache:2.2.2@jar') {
+        transitive = true
+    }
 }
