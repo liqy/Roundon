@@ -46,7 +46,7 @@ public class FullPhotoActivity extends AppCompatActivity {
 
         attacher=new PhotoViewAttacher(photoView);
 
-        getPhotoDetail(photo.id);
+        getPhotoDetail(photo.photo_id);
 
     }
 

@@ -1,32 +1,33 @@
 package com.roundon.ui;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 
-import com.jcodecraeer.xrecyclerview.ProgressStyle;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.orhanobut.logger.Logger;
-import com.roundon.AppSplash;
-import com.roundon.Config;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.roundon.R;
-import com.roundon.model.Photo;
-import com.roundon.ui.adapter.CirclePhotoAdapter;
+import com.roundon.ui.fragment.BatchFragment;
+import com.roundon.ui.fragment.CategoryFragment;
+import com.roundon.ui.fragment.GalleryFragment;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 
-public class MainActivity extends BaseActivity implements XRecyclerView.LoadingListener {
+public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.recyclerview)
-    XRecyclerView recyclerView;
+    @Bind(R.id.tl_1)
+    SlidingTabLayout tabLayout;
 
-    CirclePhotoAdapter photoAdapter;
+    @Bind(R.id.vp)
+    ViewPager viewPager;
+
+    private final String[] titles = {
+            "热门", "批次", "标签"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,57 +35,40 @@ public class MainActivity extends BaseActivity implements XRecyclerView.LoadingL
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        recyclerView.setLaodingMoreProgressStyle(ProgressStyle.BallRotate);
-        recyclerView.setLoadingListener(this);
-        photoAdapter = new CirclePhotoAdapter(this);
-        recyclerView.setAdapter(photoAdapter);
-
-        getPhotos(1);
+        viewPager.setAdapter(new SplashPagerAdapter(getSupportFragmentManager()));
+        tabLayout.setViewPager(viewPager);
 
     }
 
-    public void getPhotos(final int page) {
-        Call<List<Photo>> readCall = AppSplash.getSplashService().getPhotos(Config.aapID);
+    private class SplashPagerAdapter extends FragmentPagerAdapter {
 
-        readCall.enqueue(new Callback<List<Photo>>() {
-            @Override
-            public void onResponse(Response<List<Photo>> response, Retrofit retrofit) {
-                if (response.isSuccess()) {
-                    List<Photo> photos = response.body();
-                    photoAdapter.addPhotos(photos);
-                } else {
-                    Logger.i(response.message());
-                }
-                complete(page);
-            }
+        ArrayList<Fragment> fragments;
 
-            @Override
-            public void onFailure(Throwable t) {
-                Logger.i(t.getMessage());
-                complete(page);
-            }
-        });
-    }
+        public SplashPagerAdapter(FragmentManager fm) {
+            super(fm);
+            fragments=new ArrayList<>();
+            fragments.add(GalleryFragment.newInstance("", 0));
+            fragments.add(BatchFragment.newInstance("",""));
+            fragments.add(CategoryFragment.newInstance("",""));
+        }
 
-    public void complete(int page) {
-        if (page == 1) {
-            recyclerView.refreshComplete();
-        } else {
-            recyclerView.loadMoreComplete();
+
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles[position];
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
         }
     }
 
-    @Override
-    public void onRefresh() {
-        getPhotos(1);
-    }
 
-    @Override
-    public void onLoadMore() {
-        getPhotos(photoAdapter.getItemCount() / 10);
-    }
 }

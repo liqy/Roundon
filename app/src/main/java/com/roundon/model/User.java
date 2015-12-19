@@ -3,14 +3,22 @@ package com.roundon.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Table;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by liqy on 15/12/17.
  */
-public class User implements Parcelable {
-    public long uid;
+
+@Table(name = "Splash_User")
+public class User extends Model implements Parcelable {
+
     public String uuid;
 
-    public String id;
+    @SerializedName("id")
+    public String uid;
+
     public String username;
     public String name;
     public String first_name;
@@ -27,9 +35,8 @@ public class User implements Parcelable {
     @Override
     public String toString() {
         return "User{" +
-                "uid=" + uid +
-                ", uuid='" + uuid + '\'' +
-                ", id='" + id + '\'' +
+                "uuid='" + uuid + '\'' +
+                ", id='" + uid + '\'' +
                 ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", first_name='" + first_name + '\'' +
@@ -52,9 +59,8 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.uid);
         dest.writeString(this.uuid);
-        dest.writeString(this.id);
+        dest.writeString(this.uid);
         dest.writeString(this.username);
         dest.writeString(this.name);
         dest.writeString(this.first_name);
@@ -73,9 +79,8 @@ public class User implements Parcelable {
     }
 
     protected User(Parcel in) {
-        this.uid = in.readLong();
         this.uuid = in.readString();
-        this.id = in.readString();
+        this.uid = in.readString();
         this.username = in.readString();
         this.name = in.readString();
         this.first_name = in.readString();

@@ -3,6 +3,8 @@ package com.roundon.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 /**
@@ -10,7 +12,8 @@ import java.util.ArrayList;
  */
 public class Photo implements Parcelable {
 
-    public String id;
+    @SerializedName("id")
+    public String photo_id;
     public int  width;
     public int height;
     public String color;
@@ -25,7 +28,7 @@ public class Photo implements Parcelable {
     @Override
     public String toString() {
         return "Photo{" +
-                "id='" + id + '\'' +
+                "id='" + photo_id + '\'' +
                 ", width=" + width +
                 ", height=" + height +
                 ", color='" + color + '\'' +
@@ -49,7 +52,7 @@ public class Photo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
+        dest.writeString(this.photo_id);
         dest.writeInt(this.width);
         dest.writeInt(this.height);
         dest.writeString(this.color);
@@ -63,7 +66,7 @@ public class Photo implements Parcelable {
     }
 
     protected Photo(Parcel in) {
-        this.id = in.readString();
+        this.photo_id = in.readString();
         this.width = in.readInt();
         this.height = in.readInt();
         this.color = in.readString();
