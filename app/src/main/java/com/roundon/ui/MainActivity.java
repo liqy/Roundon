@@ -7,6 +7,7 @@ import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.orhanobut.logger.Logger;
 import com.roundon.AppSplash;
+import com.roundon.Config;
 import com.roundon.R;
 import com.roundon.model.Photo;
 import com.roundon.ui.adapter.CirclePhotoAdapter;
@@ -42,15 +43,12 @@ public class MainActivity extends BaseActivity implements XRecyclerView.LoadingL
         photoAdapter = new CirclePhotoAdapter(this);
         recyclerView.setAdapter(photoAdapter);
 
-
-
-
         getPhotos(1);
 
     }
 
     public void getPhotos(final int page) {
-        Call<List<Photo>> readCall = AppSplash.getSplashService().getPhotos();
+        Call<List<Photo>> readCall = AppSplash.getSplashService().getPhotos(Config.aapID);
 
         readCall.enqueue(new Callback<List<Photo>>() {
             @Override

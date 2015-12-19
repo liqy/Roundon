@@ -7,11 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.orhanobut.logger.Logger;
+import com.roundon.AppSplash;
+import com.roundon.Config;
 import com.roundon.R;
 import com.roundon.model.Photo;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class FullPhotoActivity extends AppCompatActivity {
@@ -38,6 +45,26 @@ public class FullPhotoActivity extends AppCompatActivity {
         Glide.with(this).load(photo.urls.small).into(photoView);
 
         attacher=new PhotoViewAttacher(photoView);
+
+        getPhotoDetail(photo.id);
+
+    }
+
+    public void getPhotoDetail(String id){
+       Call<Photo> photoCall= AppSplash.getSplashService().getPhoto(id, Config.aapID);
+        photoCall.enqueue(new Callback<Photo>() {
+            @Override
+            public void onResponse(Response<Photo> response, Retrofit retrofit) {
+                if (response.isSuccess()){
+                    Logger.i(response.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
 
     }
 }

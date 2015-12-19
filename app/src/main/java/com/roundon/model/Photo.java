@@ -14,10 +14,13 @@ public class Photo implements Parcelable {
     public int  width;
     public int height;
     public String color;
+    public long likes;
+    public long downloads;
     public User user;
     public PhotoUrl urls;
     public PhotoLink links;
     public ArrayList<Category> categories;
+    public Exif exif;
 
     @Override
     public String toString() {
@@ -26,11 +29,17 @@ public class Photo implements Parcelable {
                 ", width=" + width +
                 ", height=" + height +
                 ", color='" + color + '\'' +
+                ", likes=" + likes +
+                ", downloads=" + downloads +
                 ", user=" + user +
                 ", urls=" + urls +
                 ", links=" + links +
                 ", categories=" + categories +
+                ", exif=" + exif +
                 '}';
+    }
+
+    public Photo() {
     }
 
     @Override
@@ -44,13 +53,13 @@ public class Photo implements Parcelable {
         dest.writeInt(this.width);
         dest.writeInt(this.height);
         dest.writeString(this.color);
-        dest.writeParcelable(this.user, flags);
-        dest.writeParcelable(this.urls, flags);
-        dest.writeParcelable(this.links, flags);
+        dest.writeLong(this.likes);
+        dest.writeLong(this.downloads);
+        dest.writeParcelable(this.user, 0);
+        dest.writeParcelable(this.urls, 0);
+        dest.writeParcelable(this.links, 0);
         dest.writeTypedList(categories);
-    }
-
-    public Photo() {
+        dest.writeParcelable(this.exif, 0);
     }
 
     protected Photo(Parcel in) {
@@ -58,13 +67,16 @@ public class Photo implements Parcelable {
         this.width = in.readInt();
         this.height = in.readInt();
         this.color = in.readString();
+        this.likes = in.readLong();
+        this.downloads = in.readLong();
         this.user = in.readParcelable(User.class.getClassLoader());
         this.urls = in.readParcelable(PhotoUrl.class.getClassLoader());
         this.links = in.readParcelable(PhotoLink.class.getClassLoader());
         this.categories = in.createTypedArrayList(Category.CREATOR);
+        this.exif = in.readParcelable(Exif.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<Photo> CREATOR = new Parcelable.Creator<Photo>() {
+    public static final Creator<Photo> CREATOR = new Creator<Photo>() {
         public Photo createFromParcel(Parcel source) {
             return new Photo(source);
         }
