@@ -42,7 +42,7 @@
         <activity android:name=".welcome.WelcomeActivity" />
         <activity android:name=".ui.MySelfActivity" />
         <activity android:name=".ui.HtmlActivity" />
-        <activity android:name=".ui.LikeActivity" />
+        <activity android:name=".ui.GalleryActivity" />
         <activity android:name=".ui.FullPhotoActivity" />
         <activity android:name=".ui.CategoryActivity"></activity>
     </application>

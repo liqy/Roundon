@@ -28,9 +28,17 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
 
     List<Photo> photos;
     Activity activity;
+    int type;
+
+    public CirclePhotoAdapter(Activity activity, int type) {
+        this.activity = activity;
+        this.type = type;
+        this.photos = new ArrayList<>();
+    }
 
     public CirclePhotoAdapter(Activity activity) {
         this.activity = activity;
+        this.type = 0;
         this.photos = new ArrayList<>();
     }
 
@@ -44,7 +52,7 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_circle_photo, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, type);
     }
 
     @Override
@@ -56,7 +64,7 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
         holder.circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FullPhotoActivity.openFullPhotoActivity(activity,photo);
+                FullPhotoActivity.openFullPhotoActivity(activity, photo);
             }
         });
     }
@@ -70,14 +78,18 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
         @Bind(R.id.circle_image)
         CircleImageView circleImageView;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view, int type) {
             super(view);
             ButterKnife.bind(this, view);
-            DisplayMetrics dm= Utils.getDisplayMetrics(view.getContext());
-            ViewGroup.LayoutParams params=circleImageView.getLayoutParams();
-            params.width=dm.widthPixels;
-            params.height=dm.widthPixels;
-            circleImageView.setLayoutParams(params);
+
+            if (type == 0) {
+                DisplayMetrics dm = Utils.getDisplayMetrics(view.getContext());
+                ViewGroup.LayoutParams params = circleImageView.getLayoutParams();
+                params.width = dm.widthPixels;
+                params.height = dm.widthPixels;
+                circleImageView.setLayoutParams(params);
+            }
+
         }
     }
 }
