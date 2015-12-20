@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.roundon.R;
 import com.roundon.model.Category;
+import com.roundon.ui.GalleryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +45,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Category category = this.categories.get(position);
+        final Category category = this.categories.get(position);
         holder.name.setText(category.title);
+
+        holder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GalleryActivity.openGalleryActivity(activity,4,String.valueOf(category.id));
+            }
+        });
     }
 
     @Override

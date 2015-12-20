@@ -1,12 +1,12 @@
 package com.roundon.ui.adapter;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.roundon.R;
@@ -19,24 +19,23 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by liqy on 15/12/17.
+ * Created by liqy on 15/12/20.
  */
-public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.ViewHolder> {
+public class CardPhotoAdapter extends RecyclerView.Adapter<CardPhotoAdapter.ViewHolder> {
 
     List<Photo> photos;
     Activity activity;
     int type;
 
-    public CirclePhotoAdapter(Activity activity, int type) {
+    public CardPhotoAdapter(Activity activity, int type) {
         this.activity = activity;
         this.type = type;
         this.photos = new ArrayList<>();
     }
 
-    public CirclePhotoAdapter(Activity activity) {
+    public CardPhotoAdapter(Activity activity) {
         this.activity = activity;
         this.type = 0;
         this.photos = new ArrayList<>();
@@ -51,16 +50,14 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_circle_photo, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card_photo, parent, false);
         return new ViewHolder(view, type);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Photo photo = photos.get(position);
-        holder.circleImageView.setBorderColor(Color.parseColor(photo.color));
         Glide.with(activity).load(photo.urls.thumb).into(holder.circleImageView);
-
         holder.circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,8 +72,8 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.circle_image)
-        CircleImageView circleImageView;
+        @Bind(R.id.cardImage)
+        ImageView circleImageView;
 
         public ViewHolder(View view, int type) {
             super(view);
@@ -86,14 +83,13 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
             if (type == 0) {
                 params.width = dm.widthPixels;
                 params.height = dm.widthPixels;
-                circleImageView.setLayoutParams(params);
             }
-//            else {
-//                int width = (int) (dm.widthPixels / 3.0);
-//                params.width = width;
-//                params.height = width;
-//            }
-
+            else {
+                int width = (int) (dm.widthPixels / 3.0);
+                params.width = width;
+                params.height = width;
+            }
+            circleImageView.setLayoutParams(params);
         }
     }
 }

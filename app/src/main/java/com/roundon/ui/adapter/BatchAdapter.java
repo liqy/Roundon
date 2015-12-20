@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.roundon.R;
 import com.roundon.model.Batch;
+import com.roundon.ui.GalleryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +45,15 @@ public class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Batch batch=this.batches.get(position);
+        final Batch batch=this.batches.get(position);
         holder.name.setText(batch.published_at);
+
+        holder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GalleryActivity.openGalleryActivity(activity, 5, String.valueOf(batch.id));
+            }
+        });
     }
 
     @Override

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.orhanobut.logger.Logger;
 import com.roundon.AppSplash;
 import com.roundon.Config;
 import com.roundon.R;
@@ -86,6 +87,12 @@ public class BatchFragment extends Fragment {
             public void onResponse(Response<List<Batch>> response, Retrofit retrofit) {
                 if (response.isSuccess()) {
                     List<Batch> batches = response.body();
+
+                    Logger.i(response.raw().body().toString());
+
+                    for (Batch batch : batches) {
+                        Logger.i(batch.toString());
+                    }
                     batchAdapter.addList(batches);
                 }
             }

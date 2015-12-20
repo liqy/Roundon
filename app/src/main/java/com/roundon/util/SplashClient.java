@@ -3,6 +3,8 @@ package com.roundon.util;
 import com.roundon.service.SplashService;
 import com.squareup.okhttp.OkHttpClient;
 
+import java.util.concurrent.TimeUnit;
+
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
@@ -15,6 +17,7 @@ public class SplashClient {
 
     public SplashClient() {
         OkHttpClient client = new OkHttpClient();
+        client.setConnectTimeout(1, TimeUnit.MINUTES);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)

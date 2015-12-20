@@ -13,7 +13,7 @@ import com.roundon.AppSplash;
 import com.roundon.Config;
 import com.roundon.R;
 import com.roundon.model.Photo;
-import com.roundon.ui.adapter.CirclePhotoAdapter;
+import com.roundon.ui.adapter.CardPhotoAdapter;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class GalleryActivity extends AppCompatActivity implements XRecyclerView.
     @Bind(R.id.recyclerview)
     XRecyclerView recyclerView;
 
-    CirclePhotoAdapter photoAdapter;
+    CardPhotoAdapter photoAdapter;
 
     String id;
     int from;
@@ -67,7 +67,7 @@ public class GalleryActivity extends AppCompatActivity implements XRecyclerView.
         recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         recyclerView.setLaodingMoreProgressStyle(ProgressStyle.BallRotate);
         recyclerView.setLoadingListener(this);
-        photoAdapter = new CirclePhotoAdapter(this, 1);
+        photoAdapter = new CardPhotoAdapter(this, 1);
         recyclerView.setAdapter(photoAdapter);
 
         getPhotos(1);

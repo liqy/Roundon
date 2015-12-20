@@ -196,7 +196,7 @@ public interface SplashService {
      * @return
      */
     @Headers("Accept-Version:v1")
-    @GET("/curated_batch/{id}/photos")
+    @GET("/curated_batches/{id}/photos")
     Call<List<Photo>> getCuratedBatchPhotos(@Path("id") String id, @Query("client_id") String client_id);
 
     //STATS
