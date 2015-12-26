@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,5 +10,76 @@
         android:id="@+id/iv_photo"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
+
+    <LinearLayout
+        android:id="@+id/fromLayout"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <com.roundon.ui.widget.SplashLabel
+            android:id="@+id/downloads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:splash_label="downloads" />
+
+        <com.roundon.ui.widget.SplashLabel
+            android:id="@+id/likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:splash_label="likes" />
+
+        <com.roundon.ui.widget.SplashLabel
+            android:id="@+id/cameraman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:splash_label="cameraman" />
+
+        <com.roundon.ui.widget.SplashLabel
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:splash_label="category" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/fromLayout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="6dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.roundon.ui.widget.SplashLabel
+            android:id="@+id/make"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:splash_label="make" />
+
+        <com.roundon.ui.widget.SplashLabel
+            android:id="@+id/model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:splash_label="model" />
+
+        <com.roundon.ui.widget.SplashLabel
+            android:id="@+id/exposure_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:splash_label="exposure_time" />
+
+        <com.roundon.ui.widget.SplashLabel
+            android:id="@+id/aperture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:splash_label="aperture" />
+
+        <com.roundon.ui.widget.SplashLabel
+            android:id="@+id/focal_length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:splash_label="focal_length" />
+    </LinearLayout>
 
 </RelativeLayout>

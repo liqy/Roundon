@@ -67,8 +67,8 @@ public interface SplashService {
      * @return
      */
     @Headers("Accept-Version:v1")
-    @GET("/users/{username}/photos")
-    Call<List<Photo>> getUserPhotos(@Path("username") String username, @Query("client_id") String client_id);
+    @GET("/users/{username}/photos?per_page=24")
+    Call<List<Photo>> getUserPhotos(@Path("username") String username, @Query("client_id") String client_id, @Query("page") int page);
 
     /**
      * Get a list of photos liked by a user
@@ -78,8 +78,8 @@ public interface SplashService {
      * @return
      */
     @Headers("Accept-Version:v1")
-    @GET("/users/{username}/likes")
-    Call<List<Photo>> getLikePhotos(@Path("username") String username, @Query("client_id") String client_id);
+    @GET("/users/{username}/likes?per_page=24")
+    Call<List<Photo>> getLikePhotos(@Path("username") String username, @Query("client_id") String client_id, @Query("page") int page);
 
 
     //PHOTOS
@@ -91,8 +91,8 @@ public interface SplashService {
      * @return
      */
     @Headers("Accept-Version:v1")
-    @GET("/photos")
-    Call<List<Photo>> getPhotos(@Query("client_id") String client_id);
+    @GET("/photos?per_page=24")
+    Call<List<Photo>> getPhotos(@Query("client_id") String client_id, @Query("page") int page);
 
 
     /**
@@ -161,8 +161,8 @@ public interface SplashService {
      * @return
      */
     @Headers("Accept-Version:v1")
-    @GET("/categories/{id}/photos")
-    Call<List<Photo>> getCategoryPhotos(@Path("id") String id, @Query("client_id") String client_id);
+    @GET("/categories/{id}/photos?per_page=24")
+    Call<List<Photo>> getCategoryPhotos(@Path("id") String id, @Query("client_id") String client_id, @Query("page") int page);
 
 //CURATED BATCHES
 
@@ -173,8 +173,8 @@ public interface SplashService {
      * @return
      */
     @Headers("Accept-Version:v1")
-    @GET("/curated_batches")
-    Call<List<Batch>> getCuratedBatches(@Query("client_id") String client_id);
+    @GET("/curated_batches?per_page=24")
+    Call<List<Batch>> getCuratedBatches(@Query("client_id") String client_id, @Query("page") int page);
 
     /**
      * Retrieve a single batch

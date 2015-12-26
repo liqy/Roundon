@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Formatter;
 import java.util.Locale;
 import java.util.TimeZone;
+
 /**
  * Created by liqy on 15/12/17.
  */
@@ -52,7 +53,7 @@ public class TimeUtils {
 
     public static boolean isValidFormatForIfModifiedSinceHeader(String timestamp) {
         try {
-            return VALID_IFMODIFIEDSINCE_FORMAT.parse(timestamp)!=null;
+            return VALID_IFMODIFIEDSINCE_FORMAT.parse(timestamp) != null;
         } catch (Exception ex) {
             return false;
         }

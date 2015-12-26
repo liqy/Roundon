@@ -60,4 +60,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
     compile 'com.github.orhanobut:logger:1.12'
+    compile 'rongi.rotate-layout:rotate-layout:2.0.0'
 }

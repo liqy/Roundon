@@ -94,17 +94,17 @@ public class GalleryFragment extends Fragment implements XRecyclerView.LoadingLi
 
         Call<List<Photo>> readCall = null;
         if (from == 1) {//获取用户自己的照片
-            readCall = AppSplash.getSplashService().getUserPhotos(id, Config.aapID);
+            readCall = AppSplash.getSplashService().getUserPhotos(id, Config.aapID, page);
         } else if (from == 2) {//获取用户点赞的照片
-            readCall = AppSplash.getSplashService().getLikePhotos(id, Config.aapID);
+            readCall = AppSplash.getSplashService().getLikePhotos(id, Config.aapID, page);
         } else if (from == 3) {//搜索
 
         } else if (from == 4) {//获取一个类型的照片
-            readCall = AppSplash.getSplashService().getCategoryPhotos(id, Config.aapID);
+            readCall = AppSplash.getSplashService().getCategoryPhotos(id, Config.aapID, page);
         } else if (from == 5) {//获取一个批次的照片
             readCall = AppSplash.getSplashService().getCuratedBatchPhotos(id, Config.aapID);
         } else {//获取照片
-            readCall = AppSplash.getSplashService().getPhotos(Config.aapID);
+            readCall = AppSplash.getSplashService().getPhotos(Config.aapID, page);
         }
 
         readCall.enqueue(new Callback<List<Photo>>() {
@@ -143,6 +143,6 @@ public class GalleryFragment extends Fragment implements XRecyclerView.LoadingLi
 
     @Override
     public void onLoadMore() {
-        getPhotos(photoAdapter.getItemCount() / 10);
+        getPhotos(photoAdapter.getItemCount() / 25);
     }
 }

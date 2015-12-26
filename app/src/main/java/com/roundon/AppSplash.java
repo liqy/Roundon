@@ -11,20 +11,20 @@ import com.vincentbrison.openlibraries.android.dualcache.lib.DualCacheLogUtils;
 /**
  * Created by liqy on 15/12/17.
  */
-public class AppSplash extends com.activeandroid.app.Application{
+public class AppSplash extends com.activeandroid.app.Application {
 
     private static SplashClient splashClient;
-    public static final String YOUR_TAG="com.roundon";
+    public static final String YOUR_TAG = "com.roundon";
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        splashClient =new SplashClient();
+        splashClient = new SplashClient();
 
         Logger.init(YOUR_TAG)
                 .hideThreadInfo()
-                .methodOffset(2) ;
+                .methodOffset(2);
 
         ActiveAndroid.initialize(this);
 
@@ -33,7 +33,7 @@ public class AppSplash extends com.activeandroid.app.Application{
 
     }
 
-    public static SplashService getSplashService(){
+    public static SplashService getSplashService() {
         return splashClient.getSplashService();
     }
 }

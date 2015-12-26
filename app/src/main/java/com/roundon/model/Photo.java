@@ -14,7 +14,7 @@ public class Photo implements Parcelable {
 
     @SerializedName("id")
     public String photo_id;
-    public int  width;
+    public int width;
     public int height;
     public String color;
     public long likes;

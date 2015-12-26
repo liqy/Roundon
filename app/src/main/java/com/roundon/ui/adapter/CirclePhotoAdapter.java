@@ -59,7 +59,7 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Photo photo = photos.get(position);
         holder.circleImageView.setBorderColor(Color.parseColor(photo.color));
-        Glide.with(activity).load(photo.urls.thumb).into(holder.circleImageView);
+        Glide.with(activity).load(photo.urls.small).into(holder.circleImageView);
 
         holder.circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,12 +75,17 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
+//        @Bind(R.id.rotateLayout)
+//        RotateLayout rotateLayout;
+
         @Bind(R.id.circle_image)
         CircleImageView circleImageView;
 
         public ViewHolder(View view, int type) {
             super(view);
             ButterKnife.bind(this, view);
+//            rotateLayout.setOrientation(90, true);
             DisplayMetrics dm = Utils.getDisplayMetrics(view.getContext());
             ViewGroup.LayoutParams params = circleImageView.getLayoutParams();
             if (type == 0) {
@@ -88,12 +93,6 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
                 params.height = dm.widthPixels;
                 circleImageView.setLayoutParams(params);
             }
-//            else {
-//                int width = (int) (dm.widthPixels / 3.0);
-//                params.width = width;
-//                params.height = width;
-//            }
-
         }
     }
 }

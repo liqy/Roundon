@@ -46,12 +46,11 @@ public class MainActivity extends BaseActivity {
 
         public SplashPagerAdapter(FragmentManager fm) {
             super(fm);
-            fragments=new ArrayList<>();
+            fragments = new ArrayList<>();
             fragments.add(GalleryFragment.newInstance("", 0));
-            fragments.add(BatchFragment.newInstance("",""));
-            fragments.add(CategoryFragment.newInstance("",""));
+            fragments.add(BatchFragment.newInstance("", ""));
+            fragments.add(CategoryFragment.newInstance("", ""));
         }
-
 
 
         @Override

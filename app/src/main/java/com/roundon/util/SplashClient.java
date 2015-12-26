@@ -24,7 +24,7 @@ public class SplashClient {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        splashService =retrofit.create(SplashService.class);
+        splashService = retrofit.create(SplashService.class);
     }
 
     public SplashService getSplashService() {

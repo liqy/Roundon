@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SplashLabel">
+        <attr name="splash_label" format="string|reference"></attr>
+        <attr name="splash_desc" format="reference|string"></attr>
+    </declare-styleable>
+</resources>

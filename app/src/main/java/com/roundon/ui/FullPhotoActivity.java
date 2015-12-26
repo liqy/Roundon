@@ -11,7 +11,10 @@ import com.orhanobut.logger.Logger;
 import com.roundon.AppSplash;
 import com.roundon.Config;
 import com.roundon.R;
+import com.roundon.model.Category;
+import com.roundon.model.Exif;
 import com.roundon.model.Photo;
+import com.roundon.ui.widget.SplashLabel;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,6 +28,33 @@ public class FullPhotoActivity extends AppCompatActivity {
 
     @Bind(R.id.iv_photo)
     ImageView photoView;
+
+    @Bind(R.id.make)
+    SplashLabel make;
+
+    @Bind(R.id.model)
+    SplashLabel model;
+
+    @Bind(R.id.exposure_time)
+    SplashLabel exposure_time;
+
+    @Bind(R.id.aperture)
+    SplashLabel aperture;
+
+    @Bind(R.id.focal_length)
+    SplashLabel focal_length;
+
+    @Bind(R.id.downloads)
+    SplashLabel downloads;
+
+    @Bind(R.id.likes)
+    SplashLabel likes;
+
+    @Bind(R.id.cameraman)
+    SplashLabel cameraman;
+
+    @Bind(R.id.category)
+    SplashLabel category;
 
     Photo photo;
     PhotoViewAttacher attacher;
@@ -42,21 +72,47 @@ public class FullPhotoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         photo = getIntent().getParcelableExtra("Photo");
-        Glide.with(this).load(photo.urls.small).into(photoView);
+        Glide.with(this).load(photo.urls.regular).into(photoView);
 
-        attacher=new PhotoViewAttacher(photoView);
+        attacher = new PhotoViewAttacher(photoView);
 
         getPhotoDetail(photo.photo_id);
 
     }
 
-    public void getPhotoDetail(String id){
-       Call<Photo> photoCall= AppSplash.getSplashService().getPhoto(id, Config.aapID);
+    public void photoInfo(Photo photo) {
+        downloads.setDesc(photo.downloads + "");
+        likes.setDesc(photo.likes + "");
+        cameraman.setDesc(photo.user.name);
+        String str = "";
+        for (Category temp : photo.categories) {
+            str += temp.title + ",";
+        }
+        category.setDesc(str.substring(0, str.length() - 1));
+    }
+
+    public void setExif(Exif exif) {
+        if (exif == null) {
+            return;
+        }
+        make.setDesc(exif.make);
+        model.setDesc(exif.model);
+        exposure_time.setDesc(exif.exposure_time);
+        aperture.setDesc(exif.aperture);
+        focal_length.setDesc(exif.focal_length);
+    }
+
+    public void getPhotoDetail(String id) {
+        Call<Photo> photoCall = AppSplash.getSplashService().getPhoto(id, Config.aapID);
         photoCall.enqueue(new Callback<Photo>() {
             @Override
             public void onResponse(Response<Photo> response, Retrofit retrofit) {
-                if (response.isSuccess()){
+                if (response.isSuccess()) {
                     Logger.i(response.body().toString());
+
+                    Photo photo = response.body();
+                    photoInfo(photo);
+                    setExif(photo.exif);
                 }
             }
 
