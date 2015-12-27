@@ -6,10 +6,11 @@
 
     <TextView
         android:id="@+id/name"
+        style="@style/LabelShadowStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="8dp"
-        android:text="名称"
-        android:textColor="@android:color/white" />
+        android:textSize="32sp"
+        android:textStyle="bold" />
 </LinearLayout>

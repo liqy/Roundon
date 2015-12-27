@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:clickable="true"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/published_at"
+        style="@style/LabelShadowStyle"
         android:layout_width="match_parent"
-        android:id="@+id/name"
-        android:text="名称"
-        android:padding="8dp"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:textStyle="bold"
+        android:textSize="18sp" />
 
+    <com.roundon.ui.widget.SplashLabel
+        android:id="@+id/cameraman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:splash_label="cameraman" />
+
+    <com.roundon.ui.widget.SplashLabel
+        android:id="@+id/bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:splash_label="bio" />
 </LinearLayout>

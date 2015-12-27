@@ -24,6 +24,7 @@ public class User extends Model implements Parcelable {
     public String first_name;
     public String last_name;
     public String portfolio_url;
+    public PhotoUrl profile_image;
     public long downloads;
     public String bio;
     public long uploads_remaining;
@@ -36,12 +37,13 @@ public class User extends Model implements Parcelable {
     public String toString() {
         return "User{" +
                 "uuid='" + uuid + '\'' +
-                ", id='" + uid + '\'' +
+                ", uid='" + uid + '\'' +
                 ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", portfolio_url='" + portfolio_url + '\'' +
+                ", profile_image=" + profile_image +
                 ", downloads=" + downloads +
                 ", bio='" + bio + '\'' +
                 ", uploads_remaining=" + uploads_remaining +
@@ -50,6 +52,9 @@ public class User extends Model implements Parcelable {
                 ", email='" + email + '\'' +
                 ", links=" + links +
                 '}';
+    }
+
+    public User() {
     }
 
     @Override
@@ -66,6 +71,7 @@ public class User extends Model implements Parcelable {
         dest.writeString(this.first_name);
         dest.writeString(this.last_name);
         dest.writeString(this.portfolio_url);
+        dest.writeParcelable(this.profile_image, 0);
         dest.writeLong(this.downloads);
         dest.writeString(this.bio);
         dest.writeLong(this.uploads_remaining);
@@ -73,9 +79,6 @@ public class User extends Model implements Parcelable {
         dest.writeParcelable(this.location, 0);
         dest.writeString(this.email);
         dest.writeParcelable(this.links, 0);
-    }
-
-    public User() {
     }
 
     protected User(Parcel in) {
@@ -86,6 +89,7 @@ public class User extends Model implements Parcelable {
         this.first_name = in.readString();
         this.last_name = in.readString();
         this.portfolio_url = in.readString();
+        this.profile_image = in.readParcelable(PhotoUrl.class.getClassLoader());
         this.downloads = in.readLong();
         this.bio = in.readString();
         this.uploads_remaining = in.readLong();
@@ -95,7 +99,7 @@ public class User extends Model implements Parcelable {
         this.links = in.readParcelable(PhotoLink.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+    public static final Creator<User> CREATOR = new Creator<User>() {
         public User createFromParcel(Parcel source) {
             return new User(source);
         }

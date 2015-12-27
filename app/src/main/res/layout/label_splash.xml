@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
+    android:gravity="left|top"
     android:orientation="horizontal"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
@@ -10,27 +10,19 @@
 
     <TextView
         android:id="@+id/label"
+        style="@style/LabelShadowStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:shadowColor="#e0000000"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="2"
         android:text="make"
-        android:textColor="@android:color/white"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/desc"
+        style="@style/LabelShadowStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:shadowColor="#e0000000"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="2"
         android:text="make"
-        android:textColor="@android:color/white"
         android:textSize="14sp" />
 
 </LinearLayout>

@@ -10,6 +10,8 @@ public class PhotoUrl implements Parcelable {
     public String full;
     public String regular;
     public String small;
+    public String medium;
+    public String large;
     public String thumb;
     public String custom;
 
@@ -19,9 +21,14 @@ public class PhotoUrl implements Parcelable {
                 "full='" + full + '\'' +
                 ", regular='" + regular + '\'' +
                 ", small='" + small + '\'' +
+                ", medium='" + medium + '\'' +
+                ", large='" + large + '\'' +
                 ", thumb='" + thumb + '\'' +
                 ", custom='" + custom + '\'' +
                 '}';
+    }
+
+    public PhotoUrl() {
     }
 
     @Override
@@ -34,22 +41,23 @@ public class PhotoUrl implements Parcelable {
         dest.writeString(this.full);
         dest.writeString(this.regular);
         dest.writeString(this.small);
+        dest.writeString(this.medium);
+        dest.writeString(this.large);
         dest.writeString(this.thumb);
         dest.writeString(this.custom);
-    }
-
-    public PhotoUrl() {
     }
 
     protected PhotoUrl(Parcel in) {
         this.full = in.readString();
         this.regular = in.readString();
         this.small = in.readString();
+        this.medium = in.readString();
+        this.large = in.readString();
         this.thumb = in.readString();
         this.custom = in.readString();
     }
 
-    public static final Parcelable.Creator<PhotoUrl> CREATOR = new Parcelable.Creator<PhotoUrl>() {
+    public static final Creator<PhotoUrl> CREATOR = new Creator<PhotoUrl>() {
         public PhotoUrl createFromParcel(Parcel source) {
             return new PhotoUrl(source);
         }

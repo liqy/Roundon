@@ -13,7 +13,9 @@ import com.roundon.AppSplash;
 import com.roundon.Config;
 import com.roundon.R;
 import com.roundon.model.Batch;
+import com.roundon.ui.GalleryActivity;
 import com.roundon.ui.adapter.BatchAdapter;
+import com.roundon.util.RecyclerUtils;
 
 import java.util.List;
 
@@ -68,6 +70,17 @@ public class BatchFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         recyclerView.setLaodingMoreProgressStyle(ProgressStyle.BallRotate);
+
+        recyclerView.addOnItemTouchListener(new RecyclerUtils.RecyclerItemClickListener(
+                getActivity(), new RecyclerUtils.RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Batch batch=batchAdapter.getData(position);
+                GalleryActivity.openGalleryActivity(getActivity(), 5, String.valueOf(batch.id));
+            }
+        }
+        ));
+
         batchAdapter = new BatchAdapter(getActivity());
         recyclerView.setAdapter(batchAdapter);
         return view;

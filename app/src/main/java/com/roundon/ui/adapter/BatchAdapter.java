@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.roundon.R;
 import com.roundon.model.Batch;
-import com.roundon.ui.GalleryActivity;
+import com.roundon.ui.widget.SplashLabel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,33 +27,32 @@ public class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.ViewHolder> 
 
     public BatchAdapter(Activity activity) {
         this.activity = activity;
-        this.batches=new ArrayList<>();
+        this.batches = new ArrayList<>();
     }
 
-    public void addList(List<Batch> list){
-        if (list!=null){
+    public void addList(List<Batch> list) {
+        if (list != null) {
             this.batches.addAll(list);
             notifyDataSetChanged();
         }
     }
 
+    public Batch getData(int pos){
+        return this.batches.get(pos-1);
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(activity).inflate(R.layout.item_batch,parent,false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.item_batch, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Batch batch=this.batches.get(position);
-        holder.name.setText(batch.published_at);
-
-        holder.name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GalleryActivity.openGalleryActivity(activity, 5, String.valueOf(batch.id));
-            }
-        });
+        final Batch batch = this.batches.get(position);
+        holder.published_at.setText(batch.published_at.substring(0, batch.published_at.indexOf("T")));
+        holder.cameraman.setDesc(batch.curator.name);
+        holder.bio.setDesc(batch.curator.bio);
     }
 
     @Override
@@ -62,8 +61,15 @@ public class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.name)
-        TextView name;
+        @Bind(R.id.published_at)
+        TextView published_at;
+
+        @Bind(R.id.cameraman)
+        SplashLabel cameraman;
+
+        @Bind(R.id.bio)
+        SplashLabel bio;
+
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

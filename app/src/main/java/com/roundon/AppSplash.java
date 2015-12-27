@@ -7,6 +7,8 @@ import com.roundon.util.SplashClient;
 import com.vincentbrison.openlibraries.android.dualcache.lib.DualCacheContextUtils;
 import com.vincentbrison.openlibraries.android.dualcache.lib.DualCacheLogUtils;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 
 /**
  * Created by liqy on 15/12/17.
@@ -27,7 +29,7 @@ public class AppSplash extends com.activeandroid.app.Application {
                 .methodOffset(2);
 
         ActiveAndroid.initialize(this);
-
+        JodaTimeAndroid.init(this);
         DualCacheLogUtils.enableLog();
         DualCacheContextUtils.setContext(getApplicationContext());
 

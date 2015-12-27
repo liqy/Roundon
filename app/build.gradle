@@ -61,4 +61,7 @@ dependencies {
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
     compile 'com.github.orhanobut:logger:1.12'
     compile 'rongi.rotate-layout:rotate-layout:2.0.0'
+    compile 'com.github.lazylibrary:lazylibrary:1.0.2'
+    compile 'com.yqritc:recyclerview-flexibledivider:1.2.6'
+    compile 'net.danlew:android.joda:2.9.1'
 }

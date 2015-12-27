@@ -3,7 +3,8 @@ package com.roundon.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -24,7 +25,7 @@ import retrofit.Response;
 import retrofit.Retrofit;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-public class FullPhotoActivity extends AppCompatActivity {
+public class FullPhotoActivity extends BaseActivity implements View.OnClickListener{
 
     @Bind(R.id.iv_photo)
     ImageView photoView;
@@ -75,6 +76,7 @@ public class FullPhotoActivity extends AppCompatActivity {
         Glide.with(this).load(photo.urls.regular).into(photoView);
 
         attacher = new PhotoViewAttacher(photoView);
+        cameraman.setOnClickListener(this);
 
         getPhotoDetail(photo.photo_id);
 
@@ -88,7 +90,11 @@ public class FullPhotoActivity extends AppCompatActivity {
         for (Category temp : photo.categories) {
             str += temp.title + ",";
         }
-        category.setDesc(str.substring(0, str.length() - 1));
+
+        if (!TextUtils.isEmpty(str)){
+            category.setDesc(str.substring(0, str.length() - 1));
+        }
+
     }
 
     public void setExif(Exif exif) {
@@ -122,5 +128,16 @@ public class FullPhotoActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.cameraman:
+                MySelfActivity.openSelfActivity(FullPhotoActivity.this,photo.user);
+                break;
+            default:
+                break;
+        }
     }
 }
