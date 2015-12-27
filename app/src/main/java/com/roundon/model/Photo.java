@@ -3,6 +3,7 @@ package com.roundon.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.Model;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by liqy on 15/12/17.
  */
-public class Photo implements Parcelable {
+public class Photo extends Model implements Parcelable {
 
     @SerializedName("id")
     public String photo_id;
@@ -21,9 +22,24 @@ public class Photo implements Parcelable {
     public long downloads;
     public User user;
     public PhotoUrl urls;
-    public PhotoLink links;
     public ArrayList<Category> categories;
     public Exif exif;
+
+    public User getUser() {
+        return user;
+    }
+
+    public PhotoUrl getUrls() {
+        return urls;
+    }
+
+    public Exif getExif() {
+        return exif;
+    }
+
+    public ArrayList<Category> getCategories() {
+        return categories;
+    }
 
     @Override
     public String toString() {
@@ -36,7 +52,6 @@ public class Photo implements Parcelable {
                 ", downloads=" + downloads +
                 ", user=" + user +
                 ", urls=" + urls +
-                ", links=" + links +
                 ", categories=" + categories +
                 ", exif=" + exif +
                 '}';
@@ -60,7 +75,6 @@ public class Photo implements Parcelable {
         dest.writeLong(this.downloads);
         dest.writeParcelable(this.user, 0);
         dest.writeParcelable(this.urls, 0);
-        dest.writeParcelable(this.links, 0);
         dest.writeTypedList(categories);
         dest.writeParcelable(this.exif, 0);
     }
@@ -74,7 +88,6 @@ public class Photo implements Parcelable {
         this.downloads = in.readLong();
         this.user = in.readParcelable(User.class.getClassLoader());
         this.urls = in.readParcelable(PhotoUrl.class.getClassLoader());
-        this.links = in.readParcelable(PhotoLink.class.getClassLoader());
         this.categories = in.createTypedArrayList(Category.CREATOR);
         this.exif = in.readParcelable(Exif.class.getClassLoader());
     }

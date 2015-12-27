@@ -3,15 +3,20 @@ package com.roundon.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.Model;
+
 /**
  * Created by liqy on 15/12/17.
  */
-public class Batch implements Parcelable {
+public class Batch extends Model implements Parcelable {
     public long id;
     public String published_at;
     public long downloads;
     public User curator;
-    public PhotoLink links;
+
+    public User getCurator() {
+        return curator;
+    }
 
     @Override
     public String toString() {
@@ -20,7 +25,6 @@ public class Batch implements Parcelable {
                 ", published_at='" + published_at + '\'' +
                 ", downloads=" + downloads +
                 ", curator=" + curator +
-                ", links=" + links +
                 '}';
     }
 
@@ -35,7 +39,6 @@ public class Batch implements Parcelable {
         dest.writeString(this.published_at);
         dest.writeLong(this.downloads);
         dest.writeParcelable(this.curator, flags);
-        dest.writeParcelable(this.links, flags);
     }
 
     public Batch() {
@@ -46,7 +49,6 @@ public class Batch implements Parcelable {
         this.published_at = in.readString();
         this.downloads = in.readLong();
         this.curator = in.readParcelable(User.class.getClassLoader());
-        this.links = in.readParcelable(PhotoLink.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<Batch> CREATOR = new Parcelable.Creator<Batch>() {

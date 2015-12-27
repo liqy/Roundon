@@ -30,8 +30,11 @@ public class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.ViewHolder> 
         this.batches = new ArrayList<>();
     }
 
-    public void addList(List<Batch> list) {
+    public void addList(List<Batch> list,int page) {
         if (list != null) {
+            if (page==1){
+                this.batches.clear();
+            }
             this.batches.addAll(list);
             notifyDataSetChanged();
         }

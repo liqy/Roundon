@@ -42,8 +42,11 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
         this.photos = new ArrayList<>();
     }
 
-    public void addPhotos(List<Photo> list) {
+    public void addPhotos(List<Photo> list,int page) {
         if (list != null) {
+            if (page==1){
+                this.photos.clear();
+            }
             this.photos.addAll(list);
             notifyDataSetChanged();
         }
@@ -76,16 +79,12 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-//        @Bind(R.id.rotateLayout)
-//        RotateLayout rotateLayout;
-
         @Bind(R.id.circle_image)
         CircleImageView circleImageView;
 
         public ViewHolder(View view, int type) {
             super(view);
             ButterKnife.bind(this, view);
-//            rotateLayout.setOrientation(90, true);
             DisplayMetrics dm = Utils.getDisplayMetrics(view.getContext());
             ViewGroup.LayoutParams params = circleImageView.getLayoutParams();
             if (type == 0) {

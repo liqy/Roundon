@@ -18,7 +18,6 @@ public class User extends Model implements Parcelable {
 
     @SerializedName("id")
     public String uid;
-
     public String username;
     public String name;
     public String first_name;
@@ -29,9 +28,11 @@ public class User extends Model implements Parcelable {
     public String bio;
     public long uploads_remaining;
     public String instagram_username;
-    public Location location;
     public String email;
-    public PhotoLink links;
+
+    public PhotoUrl getProfileImage() {
+        return profile_image;
+    }
 
     @Override
     public String toString() {
@@ -48,9 +49,7 @@ public class User extends Model implements Parcelable {
                 ", bio='" + bio + '\'' +
                 ", uploads_remaining=" + uploads_remaining +
                 ", instagram_username='" + instagram_username + '\'' +
-                ", location=" + location +
                 ", email='" + email + '\'' +
-                ", links=" + links +
                 '}';
     }
 
@@ -76,9 +75,7 @@ public class User extends Model implements Parcelable {
         dest.writeString(this.bio);
         dest.writeLong(this.uploads_remaining);
         dest.writeString(this.instagram_username);
-        dest.writeParcelable(this.location, 0);
         dest.writeString(this.email);
-        dest.writeParcelable(this.links, 0);
     }
 
     protected User(Parcel in) {
@@ -94,9 +91,7 @@ public class User extends Model implements Parcelable {
         this.bio = in.readString();
         this.uploads_remaining = in.readLong();
         this.instagram_username = in.readString();
-        this.location = in.readParcelable(Location.class.getClassLoader());
         this.email = in.readString();
-        this.links = in.readParcelable(PhotoLink.class.getClassLoader());
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

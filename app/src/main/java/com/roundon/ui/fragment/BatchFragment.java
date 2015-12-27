@@ -26,7 +26,7 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class BatchFragment extends Fragment {
+public class BatchFragment extends Fragment implements XRecyclerView.LoadingListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -70,7 +70,7 @@ public class BatchFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         recyclerView.setLaodingMoreProgressStyle(ProgressStyle.BallRotate);
-
+        recyclerView.setLoadingListener(this);
         recyclerView.addOnItemTouchListener(new RecyclerUtils.RecyclerItemClickListener(
                 getActivity(), new RecyclerUtils.RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -92,21 +92,41 @@ public class BatchFragment extends Fragment {
         getCuratedBatches(1);
     }
 
-    public void getCuratedBatches(int page) {
+    public void getCuratedBatches(final int page) {
         Call<List<Batch>> readCall = AppSplash.getSplashService().getCuratedBatches(Config.aapID, page);
         readCall.enqueue(new Callback<List<Batch>>() {
             @Override
             public void onResponse(Response<List<Batch>> response, Retrofit retrofit) {
                 if (response.isSuccess()) {
                     List<Batch> batches = response.body();
-                    batchAdapter.addList(batches);
+                    batchAdapter.addList(batches,page);
                 }
+                complete(page);
             }
 
             @Override
             public void onFailure(Throwable t) {
-
+                complete(page);
             }
         });
+    }
+
+    public void complete(int page) {
+        if (page == 1) {
+            recyclerView.refreshComplete();
+        } else {
+            recyclerView.loadMoreComplete();
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        getCuratedBatches(1);
+    }
+
+    @Override
+    public void onLoadMore() {
+        int page = (batchAdapter.getItemCount() / 24) + 1;
+        getCuratedBatches(page);
     }
 }

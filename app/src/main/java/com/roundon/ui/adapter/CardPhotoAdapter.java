@@ -41,8 +41,11 @@ public class CardPhotoAdapter extends RecyclerView.Adapter<CardPhotoAdapter.View
         this.photos = new ArrayList<>();
     }
 
-    public void addPhotos(List<Photo> list) {
+    public void addPhotos(List<Photo> list,int page) {
         if (list != null) {
+            if (page==1){
+                this.photos.clear();
+            }
             this.photos.addAll(list);
             notifyDataSetChanged();
         }

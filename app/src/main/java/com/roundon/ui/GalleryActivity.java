@@ -95,7 +95,7 @@ public class GalleryActivity extends AppCompatActivity implements XRecyclerView.
             public void onResponse(Response<List<Photo>> response, Retrofit retrofit) {
                 if (response.isSuccess()) {
                     List<Photo> photos = response.body();
-                    photoAdapter.addPhotos(photos);
+                    photoAdapter.addPhotos(photos,page);
                 } else {
                     Logger.i(response.message());
                 }
@@ -126,6 +126,7 @@ public class GalleryActivity extends AppCompatActivity implements XRecyclerView.
 
     @Override
     public void onLoadMore() {
-        getPhotos(photoAdapter.getItemCount() / 25);
+        int page = (photoAdapter.getItemCount() / 25) + 1;
+        getPhotos(page);
     }
 }

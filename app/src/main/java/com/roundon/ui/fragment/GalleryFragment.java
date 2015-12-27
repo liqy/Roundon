@@ -112,7 +112,7 @@ public class GalleryFragment extends Fragment implements XRecyclerView.LoadingLi
             public void onResponse(Response<List<Photo>> response, Retrofit retrofit) {
                 if (response.isSuccess()) {
                     List<Photo> photos = response.body();
-                    photoAdapter.addPhotos(photos);
+                    photoAdapter.addPhotos(photos, page);
                 } else {
                     Logger.i(response.message());
                 }
@@ -143,6 +143,7 @@ public class GalleryFragment extends Fragment implements XRecyclerView.LoadingLi
 
     @Override
     public void onLoadMore() {
-        getPhotos(photoAdapter.getItemCount() / 25);
+        int page = (photoAdapter.getItemCount() / 24) + 1;
+        getPhotos(page);
     }
 }

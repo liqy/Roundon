@@ -3,14 +3,15 @@ package com.roundon.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.Model;
+
 /**
  * Created by liqy on 15/12/17.
  */
-public class Category implements Parcelable {
+public class Category extends Model implements Parcelable {
     public long id;
     public String title;
     public long photo_count;
-    public PhotoLink links;
 
     @Override
     public String toString() {
@@ -18,7 +19,6 @@ public class Category implements Parcelable {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", photo_count=" + photo_count +
-                ", links=" + links +
                 '}';
     }
 
@@ -32,7 +32,6 @@ public class Category implements Parcelable {
         dest.writeLong(this.id);
         dest.writeString(this.title);
         dest.writeLong(this.photo_count);
-        dest.writeParcelable(this.links, flags);
     }
 
     public Category() {
@@ -42,7 +41,6 @@ public class Category implements Parcelable {
         this.id = in.readLong();
         this.title = in.readString();
         this.photo_count = in.readLong();
-        this.links = in.readParcelable(PhotoLink.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
