@@ -7,29 +7,50 @@
     tools:context="com.roundon.ui.MySelfActivity">
 
     <LinearLayout
+        android:id="@+id/profile_layout"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:padding="10dp"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:scaleType="centerCrop"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#FF000000" />
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp" />
 
         <TextView
-            style="@style/LabelShadowStyle"
             android:id="@+id/username"
+            style="@style/LabelShadowStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:text=""
             android:textSize="16sp" />
-
     </LinearLayout>
+
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tl_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_layout"
+        android:background="#666666"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        app:tl_indicator_gravity="TOP"
+        app:tl_tab_space_equal="true"
+        app:tl_underline_color="#1A000000"
+        app:tl_underline_gravity="TOP"
+        app:tl_underline_height="1dp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tl_1" />
 
 </RelativeLayout>

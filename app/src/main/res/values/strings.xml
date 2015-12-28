@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Roundon</string>
+    <string name="app_name">Splash</string>
 
     <!-- Shown as the title of the user's schedule for today -->
     <string name="day_title_today">Today</string>

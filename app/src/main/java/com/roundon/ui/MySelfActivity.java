@@ -3,15 +3,23 @@ package com.roundon.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.orhanobut.logger.Logger;
 import com.roundon.AppSplash;
 import com.roundon.Config;
 import com.roundon.R;
 import com.roundon.model.User;
+import com.roundon.ui.fragment.GalleryFragment;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,6 +39,16 @@ public class MySelfActivity extends AppCompatActivity {
     @Bind(R.id.username)
     TextView username;
 
+    @Bind(R.id.tl_1)
+    SlidingTabLayout tabLayout;
+
+    @Bind(R.id.vp)
+    ViewPager viewPager;
+
+    private final String[] titles = {
+            "Me", "Like"
+    };
+
     public static void openSelfActivity(Activity activity, User user) {
         Intent intent = new Intent(activity, MySelfActivity.class);
         intent.putExtra("User", user);
@@ -43,7 +61,13 @@ public class MySelfActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_self);
         ButterKnife.bind(this);
         user = getIntent().getParcelableExtra("User");
-        getInfo();
+
+        username.setText(user.name);
+        Glide.with(MySelfActivity.this).load(user.profile_image.large).into(profile_image);
+
+        viewPager.setAdapter(new SplashPagerAdapter(getSupportFragmentManager()));
+        tabLayout.setViewPager(viewPager);
+
     }
 
 
@@ -65,5 +89,33 @@ public class MySelfActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private class SplashPagerAdapter extends FragmentPagerAdapter {
+
+        ArrayList<Fragment> fragments;
+
+        public SplashPagerAdapter(FragmentManager fm) {
+            super(fm);
+            fragments = new ArrayList<>();
+            fragments.add(GalleryFragment.newInstance(user.username, 1));
+            fragments.add(GalleryFragment.newInstance(user.username, 2));
+        }
+
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles[position];
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
     }
 }
