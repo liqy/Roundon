@@ -62,7 +62,7 @@ public class CirclePhotoAdapter extends RecyclerView.Adapter<CirclePhotoAdapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Photo photo = photos.get(position);
         holder.circleImageView.setBorderColor(Color.parseColor(photo.color));
-        Glide.with(activity).load(photo.urls.small).into(holder.circleImageView);
+        Glide.with(activity).load(photo.urls.regular).into(holder.circleImageView);
 
         holder.circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override

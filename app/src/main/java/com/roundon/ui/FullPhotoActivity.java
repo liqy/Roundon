@@ -19,10 +19,9 @@ import com.roundon.ui.widget.SplashLabel;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class FullPhotoActivity extends BaseActivity implements View.OnClickListener{
@@ -73,7 +72,7 @@ public class FullPhotoActivity extends BaseActivity implements View.OnClickListe
         ButterKnife.bind(this);
 
         photo = getIntent().getParcelableExtra("Photo");
-        Glide.with(this).load(photo.urls.regular).into(photoView);
+        Glide.with(this).load(photo.urls.large).into(photoView);
 
         attacher = new PhotoViewAttacher(photoView);
         cameraman.setOnClickListener(this);
@@ -112,7 +111,7 @@ public class FullPhotoActivity extends BaseActivity implements View.OnClickListe
         Call<Photo> photoCall = AppSplash.getSplashService().getPhoto(id, Config.aapID);
         photoCall.enqueue(new Callback<Photo>() {
             @Override
-            public void onResponse(Response<Photo> response, Retrofit retrofit) {
+            public void onResponse(Response<Photo> response) {
                 if (response.isSuccess()) {
                     Logger.i(response.body().toString());
 

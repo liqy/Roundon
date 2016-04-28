@@ -21,10 +21,10 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class GalleryFragment extends Fragment implements XRecyclerView.LoadingListener {
@@ -109,7 +109,7 @@ public class GalleryFragment extends Fragment implements XRecyclerView.LoadingLi
 
         readCall.enqueue(new Callback<List<Photo>>() {
             @Override
-            public void onResponse(Response<List<Photo>> response, Retrofit retrofit) {
+            public void onResponse(Response<List<Photo>> response) {
                 if (response.isSuccess()) {
                     List<Photo> photos = response.body();
                     photoAdapter.addPhotos(photos, page);

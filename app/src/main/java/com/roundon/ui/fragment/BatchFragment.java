@@ -21,10 +21,9 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BatchFragment extends Fragment implements XRecyclerView.LoadingListener {
     private static final String ARG_PARAM1 = "param1";
@@ -96,7 +95,7 @@ public class BatchFragment extends Fragment implements XRecyclerView.LoadingList
         Call<List<Batch>> readCall = AppSplash.getSplashService().getCuratedBatches(Config.aapID, page);
         readCall.enqueue(new Callback<List<Batch>>() {
             @Override
-            public void onResponse(Response<List<Batch>> response, Retrofit retrofit) {
+            public void onResponse(Response<List<Batch>> response) {
                 if (response.isSuccess()) {
                     List<Batch> batches = response.body();
                     batchAdapter.addList(batches,page);

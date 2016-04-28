@@ -24,10 +24,9 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MySelfActivity extends AppCompatActivity {
 
@@ -75,7 +74,7 @@ public class MySelfActivity extends AppCompatActivity {
         Call<User> userCall = AppSplash.getSplashService().getProfile(user.username, Config.aapID);
         userCall.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Response<User> response, Retrofit retrofit) {
+            public void onResponse(Response<User> response) {
                 if (response.isSuccess()) {
                     user = response.body();
                     Logger.i(user.toString());

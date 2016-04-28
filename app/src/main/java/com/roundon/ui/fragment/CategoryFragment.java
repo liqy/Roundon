@@ -20,10 +20,9 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CategoryFragment extends Fragment {
@@ -85,7 +84,7 @@ public class CategoryFragment extends Fragment {
         Call<List<Category>> readCall= AppSplash.getSplashService().getCategories(Config.aapID);
         readCall.enqueue(new Callback<List<Category>>() {
             @Override
-            public void onResponse(Response<List<Category>> response, Retrofit retrofit) {
+            public void onResponse(Response<List<Category>> response) {
                 if (response.isSuccess()){
                     List<Category> categories=response.body();
                     categoryAdapter.addList(categories);
